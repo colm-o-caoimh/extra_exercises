@@ -6,24 +6,51 @@ def questions():
     ans = input('Type one letter (a/v/q):')
     return ans
 
+ans = questions()
+print("You chose", ans)
+
+students = []
+
+
 def doAdd():
-    name = input("Enter name: ")
-    modules = input("Enter modules: ")
-    student_dict = {'name': name, "modules": []}
-    student_array = []
-    student_array.append(student_dict)
-    print(student_dict)
-    print(student_array)
+    student_dict = {}
+    student_dict["name"] = input("Enter name: ")
+    students.append(student_dict)
+    student_dict["modules"] = read_modules()
+    
+
+def read_modules():
+    module_array = []
+    moduleName = input("Enter the first Module name (blank to quit): ")
+    
+    while moduleName != "":
+        module = {}
+        module["name"] = moduleName
+        module["grade"] = input("enter grade: ")
+        module_array.append(module)
+        moduleName = input("Enter next module name (blank to quit): ")
+       
+
+    return module_array
+
+
+
+while ans != 'q':
+    if ans == "a":
+        doAdd()
+        print(students)
+    elif ans == "v":
+        doView()
+    else:
+        print("Thank you. Have a nice day")
+
+#doAdd()
+#doAdd()
+#print(students)
+
 
 def doView():
     print("in viewing")
 
-ans = questions()
-print("You chose", ans)
 
-if ans == "a":
-    doAdd()
-elif ans == "v":
-    doView()
-else:
-    print("Thank you. Have a nice day")
+
