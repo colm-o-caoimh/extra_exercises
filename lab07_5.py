@@ -1,14 +1,21 @@
 # Colm O'Caoimh
-# Week 6 lab. Program to add and view students to a module
+# With the program we made last week, create a new menu item called save.
+# When the user selects the doSave() function should be called 
+# (the do save can do nothing but printout doSave for the moment.
+
+import json
 
 students = []
 
 def questions():
     print('What would you like to do?')
-    print('(a) Add new student')
-    print('(v) View students')
-    print('(q) Quit')
-    ans = input('Type one letter (a/v/q):')
+    print('\t (a) Add new student')
+    print('\t (v) View students')
+    print('\t (s) Save students')
+    print('\t (l) Load students')
+    print('\t (q) Quit')
+    
+    ans = input('Type one letter (a/v/s/l/q):')
     return ans
 
 
@@ -43,6 +50,26 @@ def doView():
         print(currentStudent["name"])
         displayModules(currentStudent["modules"])
 
+# write function to save student data as JSON file
+def saveDict():
+    with open("studentData.json", "w") as f:
+        json.dump(students, f)
+        print("Student info. has been saved")
+
+def doSave():
+    saveDict()
+
+def readDict():
+    loadDict = input('Enter file for loading: ')
+    with open(loadDict, "r") as f:
+        json.load(f)
+        students.append(f)
+        return students
+
+def doLoad():
+    global students 
+    students = readDict()
+
 # main program
 ans = questions()
 while ans != 'q':
@@ -50,8 +77,12 @@ while ans != 'q':
         doAdd()
     elif ans == "v":
         doView()
+    elif ans == "s":
+        doSave()
+    elif ans == "l":
+        doLoad()
     elif ans != 'q':
-        print("please select either a, v or q.")
+        print("please select either a, v, s or q.")
     ans = questions()
 
 #doAdd()

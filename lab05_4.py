@@ -33,4 +33,4 @@ student_dict = {
 print("Student:" + student_dict['Name'])
 
 for course in student_dict['Courses']:
-    print("\t{}: {}".format(course["Course_name"],course["Grade"]))
+    print("\t{}: \t{}".format(course["Course_name"],course["Grade"]))
